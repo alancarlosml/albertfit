@@ -10,13 +10,13 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('establishment_id');
+            $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
             $table->string('description');
             $table->decimal('amount', 8, 2);
             $table->enum('type', ['receber', 'pagar']); // Tipo de conta: a receber ou a pagar
             $table->date('due_date');
             $table->boolean('paid')->default(false);
-            $table->unsignedBigInteger('establishment_id');
-            $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
             $table->timestamps();
         });
     }

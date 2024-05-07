@@ -10,13 +10,13 @@ class CreateClassSchedulesTable extends Migration
     {
         Schema::create('class_schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('day_of_week');
-            $table->time('start_time');
-            $table->time('end_time');
             $table->unsignedBigInteger('modality_id');
             $table->foreign('modality_id')->references('id')->on('modalities')->onDelete('cascade');
             $table->unsignedBigInteger('establishment_id');
             $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
+            $table->string('day_of_week');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }
