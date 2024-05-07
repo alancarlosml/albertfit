@@ -15,6 +15,8 @@ class CreateClassSchedulesTable extends Migration
             $table->time('end_time');
             $table->unsignedBigInteger('modality_id');
             $table->foreign('modality_id')->references('id')->on('modalities')->onDelete('cascade');
+            $table->unsignedBigInteger('establishment_id');
+            $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -14,6 +14,8 @@ class CreatePerformanceLogsTable extends Migration
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->unsignedBigInteger('exercise_id');
             $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
+            $table->unsignedBigInteger('establishment_id');
+            $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
             $table->integer('sets');
             $table->integer('repetitions');
             $table->decimal('weight', 8, 2)->nullable();

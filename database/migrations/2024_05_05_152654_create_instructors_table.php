@@ -10,10 +10,9 @@ class CreateInstructorsTable extends Migration
     {
         Schema::create('instructors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('cpf')->unique();
-            $table->string('phone');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('phone')->nullable();
             $table->string('profile_picture')->nullable();
             $table->text('academic_degree')->nullable();
             $table->text('professional_experience')->nullable();

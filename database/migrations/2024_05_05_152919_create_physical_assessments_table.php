@@ -12,6 +12,8 @@ class CreatePhysicalAssessmentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->unsignedBigInteger('establishment_id');
+            $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
             $table->date('assessment_date');
             $table->decimal('weight', 8, 2)->nullable();
             $table->decimal('height', 8, 2)->nullable();

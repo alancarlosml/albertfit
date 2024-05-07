@@ -18,7 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('cpf')->unique();
-            $table->string('role'); // Pode ser 'admin', 'recepcionista', 'instrutor', etc.
+            $table->string('role'); // Pode ser 'admin', 'instrutor', 'recepcionista', 'assistente', 'nutricionista', etc.
+            $table->unsignedBigInteger('establishment_id');
+            $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

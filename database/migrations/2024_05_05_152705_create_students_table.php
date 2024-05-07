@@ -16,8 +16,8 @@ class CreateStudentsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->date('birthdate');
-            $table->string('address');
-            $table->string('phone');
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
             $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();

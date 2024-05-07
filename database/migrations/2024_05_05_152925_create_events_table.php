@@ -16,6 +16,8 @@ class CreateEventsTable extends Migration
             $table->dateTime('end_date');
             $table->string('location');
             $table->boolean('active')->default(false);
+            $table->unsignedBigInteger('establishment_id');
+            $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
             // Adicionar mais campos conforme necessário para outras informações detalhadas sobre o evento
             $table->timestamps();
         });
