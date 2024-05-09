@@ -17,6 +17,7 @@ class CreateInstructorsTable extends Migration
             $table->text('academic_degree')->nullable();
             $table->text('professional_experience')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

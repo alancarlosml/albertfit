@@ -21,6 +21,7 @@ class CreateStudentsTable extends Migration
             $table->string('profile_picture')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens_student', function (Blueprint $table) {

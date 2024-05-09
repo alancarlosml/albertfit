@@ -22,6 +22,7 @@ class CreateWorkoutsTable extends Migration
             $table->integer('repetitions');
             $table->integer('rest_time'); // Tempo de descanso entre séries em segundos
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

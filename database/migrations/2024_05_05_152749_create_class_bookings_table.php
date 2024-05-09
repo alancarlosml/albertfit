@@ -17,6 +17,7 @@ class CreateClassBookingsTable extends Migration
             $table->dateTime('booking_date');
             $table->boolean('checked_in')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

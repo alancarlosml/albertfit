@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Instructor;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -21,7 +22,7 @@ class InstructorFactory extends Factory
         $degree = ['Graduado', 'Especialista', 'Mestre', 'Doutor'];
 
         $instructorAttributes = [
-            'user_id' => $this->faker->numberBetween(1, 10),
+            'user_id' => User::all()->random()->id,
             'phone' => $this->faker->phoneNumber,
             'profile_picture' => null, // Pode adicionar um link para uma imagem aleatória, se desejar
             'academic_degree' => $this->faker->randomElement($degree),

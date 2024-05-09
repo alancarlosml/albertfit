@@ -16,6 +16,7 @@ class CreateWorkoutLogsTable extends Migration
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->date('date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

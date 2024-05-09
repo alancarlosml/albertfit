@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('role'); // Pode ser 'admin', 'instrutor', 'recepcionista', 'assistente', 'nutricionista', etc.
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

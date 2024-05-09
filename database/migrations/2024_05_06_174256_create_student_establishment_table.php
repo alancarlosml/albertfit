@@ -16,6 +16,7 @@ class CreateStudentEstablishmentTable extends Migration
             $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
             $table->boolean('active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

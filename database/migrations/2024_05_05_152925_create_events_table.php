@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->boolean('active')->default(false);
             // Adicionar mais campos conforme necessário para outras informações detalhadas sobre o evento
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -21,6 +21,7 @@ class CreatePhysicalAssessmentsTable extends Migration
             $table->decimal('muscle_mass_percentage', 5, 2)->nullable();
             // Adicionar mais campos conforme necessário para outras medidas corporais ou testes de condicionamento físico
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

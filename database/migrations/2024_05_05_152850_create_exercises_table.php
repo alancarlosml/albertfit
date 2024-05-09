@@ -17,6 +17,7 @@ class CreateExercisesTable extends Migration
             $table->string('exercise_picture')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

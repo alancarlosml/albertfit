@@ -14,10 +14,12 @@ class CreateClassSchedulesTable extends Migration
             $table->foreign('modality_id')->references('id')->on('modalities')->onDelete('cascade');
             $table->unsignedBigInteger('establishment_id');
             $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
-            $table->string('day_of_week');
+            $table->string('description')->nullable();
+            $table->date('class_date');
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

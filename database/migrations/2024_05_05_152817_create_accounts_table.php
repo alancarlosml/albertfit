@@ -18,6 +18,7 @@ class CreateAccountsTable extends Migration
             $table->date('due_date');
             $table->boolean('paid')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

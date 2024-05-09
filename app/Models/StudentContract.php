@@ -9,6 +9,8 @@ class StudentContract extends Model
 {
     use HasFactory;
 
+    protected $table = 'students_contracts';
+
     protected $fillable = [
         'student_id',
         'service_name',

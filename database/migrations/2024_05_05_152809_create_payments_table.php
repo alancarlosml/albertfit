@@ -17,6 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->decimal('amount', 8, 2);
             $table->date('payment_date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -22,6 +22,7 @@ class CreatePerformanceLogsTable extends Migration
             $table->decimal('effort_percentage', 5, 2)->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

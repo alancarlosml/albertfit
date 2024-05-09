@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Establishment;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +28,7 @@ class UserFactory extends Factory
         $roles = ['admin', 'recepcionista', 'assistente', 'nutricionista'];
 
         $userAttributes = [
-            'establishment_id' => $this->faker->numberBetween(1, 5),
+            'establishment_id' => Establishment::all()->random()->id,
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
