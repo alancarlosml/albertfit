@@ -22,6 +22,7 @@ class ModalityFactory extends Factory
     public function definition()
     {
         return [
+            'establishment_id' => Establishment::all()->random()->id,
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
             'active' => $this->faker->boolean(80), // 80% chance of being active
