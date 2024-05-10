@@ -2,10 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\StudentContract;
 use App\Models\Student;
 use App\Models\Establishment;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StudentEstablishmentFactory extends Factory
