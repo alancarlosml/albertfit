@@ -30,4 +30,14 @@ class Establishment extends Model
     {
         return $this->hasMany(EstablishmentContracts::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_establishment');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'student_establishment');
+    }
 }
