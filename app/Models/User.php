@@ -46,4 +46,11 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    public function establishments()
+    {
+        return $this->belongsToMany(Establishment::class, 'user_establishment', 'user_id', 'establishment_id')
+            ->withPivot('role', 'active')
+            ->withTimestamps();
+    }
 }
