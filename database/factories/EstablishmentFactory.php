@@ -32,7 +32,7 @@ class EstablishmentFactory extends Factory
             'address' => $this->faker->address,
             'social_network' => $this->faker->optional()->url,
             'website' => $this->faker->optional()->url,
-            'active' => $this->faker->boolean(90),
+            'active' => $this->faker->boolean(90    ),
         ];
     }
 }

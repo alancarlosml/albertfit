@@ -18,7 +18,7 @@ class CreateEstablishmentsTable extends Migration
             $table->string('address')->nullable();
             $table->string('social_network')->nullable();
             $table->string('website')->nullable();
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

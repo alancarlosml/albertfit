@@ -32,6 +32,12 @@ class EstablishmentController extends Controller
             'active' => 'nullable|boolean',
         ]);
 
+        if(isset($validatedData['active'])) {
+            $validatedData['active'] = 1;
+        } else {
+            $validatedData['active'] = 0;
+        }
+
         \App\Models\Establishment::create($validatedData);
 
         return redirect()->route('admin.establishments.index')->with('success', 'Estabelecimento atualizado com sucesso!');
@@ -63,11 +69,22 @@ class EstablishmentController extends Controller
             'active' => 'nullable|boolean',
         ]);
 
-        // dd($validatedData);
+        if(isset($validatedData['active'])) {
+            $validatedData['active'] = 1;
+        } else {
+            $validatedData['active'] = 0;
+        }
 
         $establishment->update($validatedData);
 
         return redirect()->route('admin.establishments.index')->with('success', 'Estabelecimento atualizado com sucesso!');
+    }
+
+    public function view($establishmentId)
+    {
+        $establishment = \App\Models\Establishment::findOrFail($establishmentId);
+        
+        return view('admin.establishments.view', ['establishment' => $establishment]);
     }
 
     public function destroy($establishmentId)

@@ -10,6 +10,8 @@ class CreateWorkoutLogsTable extends Migration
     {
         Schema::create('workout_logs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('establishment_id');
+            $table->foreign('establishment_id')->references('id')->on('establishments')->onDelete('cascade');
             $table->unsignedBigInteger('workout_id');
             $table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
             $table->unsignedBigInteger('student_id');

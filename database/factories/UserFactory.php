@@ -25,7 +25,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $roles = ['admin', 'recepcionista', 'assistente', 'nutricionista'];
+        $roles = ['superuser', 'admin', 'recepcionista', 'assistente', 'nutricionista'];
 
         $userAttributes = [
             'establishment_id' => Establishment::all()->random()->id,
@@ -36,6 +36,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'cpf' => $this->faker->numerify('###########'),
             'role' => $this->faker->randomElement($roles),
+            'active' => $this->faker->boolean(90),
         ];
 
         return $userAttributes;

@@ -8,7 +8,7 @@ use App\Models\Establishment;
 use App\Models\Instructor;
 use App\Models\Modality;
 use App\Models\Student;
-use App\Models\StudentContract;
+use App\Models\StudentEstablishment;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         Modality::factory(5)->create();
         ClassSchedule::factory(10)->create();
         ClassBooking::factory(10)->create();
-        StudentContract::factory(50)->create();
+        StudentEstablishment::factory(50)->create();
 
     }
 }

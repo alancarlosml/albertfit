@@ -20,7 +20,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('cpf')->unique();
-            $table->string('role'); // Pode ser 'admin', 'instrutor', 'recepcionista', 'assistente', 'nutricionista', etc.
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

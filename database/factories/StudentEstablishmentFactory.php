@@ -8,10 +8,15 @@ use App\Models\Establishment;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class StudentContractFactory extends Factory
+class StudentEstablishmentFactory extends Factory
 {
-    protected $model = StudentContract::class;
+    protected $model = \App\Models\StudentEstablishment::class;
 
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
     public function definition()
     {
         // Busca um aluno aleatório
@@ -19,16 +24,6 @@ class StudentContractFactory extends Factory
 
         // Busca um estabelecimento aleatório
         $establishment = Establishment::inRandomOrder()->first();
-
-        // Verifica se já existe um contrato para essa combinação de estudante e estabelecimento
-        $existingContract = StudentContract::where('student_id', $student->id)
-                                            ->where('establishment_id', $establishment->id)
-                                            ->exists();
-
-        // Se já existe um contrato para essa combinação, retorna null
-        if ($existingContract) {
-            return null;
-        }
 
         // Define um nome de serviço aleatório
         $serviceName = $this->faker->randomElement(['semanal', 'mensal', 'trimestral', 'semestral', 'anual']);
@@ -50,6 +45,7 @@ class StudentContractFactory extends Factory
             'start_date' => $startDate,
             'end_date' => $endDate,
         ];
+        
     }
 }
 

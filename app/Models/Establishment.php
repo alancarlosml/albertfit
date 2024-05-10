@@ -22,4 +22,12 @@ class Establishment extends Model
         'website',
         'active',
     ];
+
+    /**
+     * Get the contracts that belongs to the establishment.
+     */
+    public function contracts()
+    {
+        return $this->hasMany(EstablishmentContracts::class);
+    }
 }

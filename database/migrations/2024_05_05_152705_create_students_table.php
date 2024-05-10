@@ -19,6 +19,8 @@ class CreateStudentsTable extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('profile_picture')->nullable();
+            $table->enum('gender', ['masculino', 'feminino', 'outro']);
+            $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StudentContract extends Model
+class UserEstablishment extends Model
 {
     use HasFactory;
 
-    protected $table = 'students_contracts';
+    protected $table = 'user_establishment';
 
     protected $fillable = [
-        'student_id',
-        'service_name',
-        'amount',
-        'start_date',
-        'end_date',
-        // Adicione mais campos conforme necessário
+        'user_id',
+        'establishment_id',
+        'role',
+        'active'
     ];
 
     public function student()

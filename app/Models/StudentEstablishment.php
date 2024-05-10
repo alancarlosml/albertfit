@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class StudentEstablishment extends Model
 {
     use HasFactory;
 
+    protected $table = 'student_establishment';
+
     protected $fillable = [
         'student_id',
+        'establishment_id',
+        'service_name',
         'amount',
-        'payment_date',
-        // Adicionar mais campos conforme necessário
+        'start_date',
+        'end_date',
+        'active',
     ];
 
     public function student()

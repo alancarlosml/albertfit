@@ -15,6 +15,8 @@ class CreateAccountsTable extends Migration
             $table->string('description');
             $table->decimal('amount', 8, 2);
             $table->enum('type', ['receber', 'pagar']); // Tipo de conta: a receber ou a pagar
+            $table->date('payment_date');
+            $table->enum('payment_type', ['credito', 'debito', 'pix','boleto', 'dinheiro']);
             $table->date('due_date');
             $table->boolean('paid')->default(false);
             $table->timestamps();

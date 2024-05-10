@@ -23,6 +23,8 @@ class StudentFactory extends Factory
      */
     public function definition()
     {
+        $genders = ['masculino', 'feminino', 'outro'];
+
         return [
             'name' => $this->faker->name,
             'cpf' => $this->faker->unique()->numerify('###########'), // Assuming 11 digits CPF
@@ -33,6 +35,8 @@ class StudentFactory extends Factory
             'address' => $this->faker->address,
             'phone' => $this->faker->phoneNumber,
             'profile_picture' => $this->faker->imageUrl(), // Assuming you want a random image URL
+            'gender' => $this->faker->randomElement($genders),
+            'active' => $this->faker->boolean(90),
             'remember_token' => Str::random(10),
         ];
     }

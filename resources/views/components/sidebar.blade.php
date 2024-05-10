@@ -41,7 +41,7 @@
                     </svg>
                 </button>
                 <x-dark-mode-toggle size="6" />
-                <div class="flex items-center ml-1">
+                <div class="flex items-center ml-2">
                     <div>
                         <button type="button"
                                 class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
