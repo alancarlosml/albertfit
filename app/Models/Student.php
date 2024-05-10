@@ -39,4 +39,14 @@ class Student extends Model
         'email_verified_at',
         'deleted_at',
     ];
+
+    public function user_establishments()
+    {
+        return $this->belongsToMany(Establishment::class, 'user_establishment');
+    }
+
+    public function student_establishments()
+    {
+        return $this->belongsToMany(Establishment::class, 'student_establishment');
+    }
 }
