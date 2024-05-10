@@ -18,8 +18,19 @@ class UserEstablishment extends Model
         'active'
     ];
 
-    public function student()
+    /**
+     * Get the user that owns the user_establishment relationship.
+     */
+    public function user()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the establishment that owns the user_establishment relationship.
+     */
+    public function establishment()
+    {
+        return $this->belongsTo(Establishment::class);
     }
 }
