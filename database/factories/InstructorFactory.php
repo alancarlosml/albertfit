@@ -1,34 +1,29 @@
 <?php
 
-namespace Database\Factories;
-
 use App\Models\Instructor;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class InstructorFactory extends Factory
 {
     protected $model = Instructor::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         $degree = ['Graduado', 'Especialista', 'Mestre', 'Doutor'];
 
+        // Filtrando usuários com a função de instrutor
+        $instructorIds = User::whereHas('establishments', function ($query) {
+            $query->where('role', 'instrutor');
+        })->pluck('id')->toArray();
+
         $instructorAttributes = [
-            'user_id' => User::all()->random()->id,
+            'user_id' => $this->faker->randomElement($instructorIds),
             'phone' => $this->faker->phoneNumber,
             'profile_picture' => null, // Pode adicionar um link para uma imagem aleatória, se desejar
             'academic_degree' => $this->faker->randomElement($degree),
             'professional_experience' => $this->faker->paragraph,
         ];
-
 
         return $instructorAttributes;
     }

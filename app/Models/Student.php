@@ -2,24 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Student extends Model
+class Student extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
         'cpf',
         'email',
-        'email_verified_at',
         'password',
         'birthdate',
         'address',
@@ -30,20 +30,33 @@ class Student extends Model
     ];
 
     /**
-     * The attributes that should be mutated to dates.
+     * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<int, string>
      */
-    protected $dates = [
-        'birthdate',
-        'email_verified_at',
-        'deleted_at',
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
-    public function user_establishments()
-    {
-        return $this->belongsToMany(Establishment::class, 'user_establishment');
-    }
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'birthdate' => 'date',
+    ];
+
+    /**
+     * Get the attributes that should be mutated to dates.
+     *
+     * @var array<string>
+     */
+    protected $dates = [
+        'deleted_at',
+    ];
 
     public function student_establishments()
     {
