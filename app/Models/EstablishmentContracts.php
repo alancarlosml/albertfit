@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EstablishmentContracts extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'establishment_contracts';
 
@@ -15,14 +16,19 @@ class EstablishmentContracts extends Model
         'establishment_id',
         'service_name',
         'amount',
+        'payment_date',
+        'payment_type',
         'start_date',
         'end_date',
         'active',
     ];
 
-    /**
-     * Get the establishment that owns the contract.
-     */
+    protected $dates = [
+        'payment_date',
+        'start_date',
+        'end_date',
+    ];
+
     public function establishment()
     {
         return $this->belongsTo(Establishment::class);

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEstablishmentRequest;
+use App\Http\Requests\UpdateEstablishmentRequest;
 use Illuminate\Http\Request;
 
 class EstablishmentController extends Controller
@@ -12,25 +14,40 @@ class EstablishmentController extends Controller
         return view('admin.establishments.index', ['establishments' => $establishments]);
     }
 
+    // public function index(Request $request)
+    // {
+    //     $query = \App\Models\Establishment::query();
+
+    //     if ($request->has('search')) {
+    //         $search = $request->input('search');
+    //         $query->where('name', 'like', "%{$search}%")
+    //             ->orWhere('type', 'like', "%{$search}%")
+    //             ->orWhere('cnpj', 'like', "%{$search}%")
+    //             ->orWhere('phone', 'like', "%{$search}%");
+    //     }
+
+    //     $establishments = $query->paginate(10);
+        
+    //     if ($request->ajax()) {
+    //         return response()->json([
+    //             'html' => view('admin.establishments.partials.table', compact('establishments'))->render(),
+    //             'pagination' => (string) $establishments->links()
+    //         ]);
+    //     }
+
+    //     return view('admin.establishments.index', ['establishments' => $establishments]);
+    // }
+
+
     public function create()
     {
         $types = \App\Models\Establishment::pluck('type', 'type')->unique();
         return view('admin.establishments.add', ['types'=> $types]);
     }
 
-    public function store(Request $request)
+    public function store(StoreEstablishmentRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'required|in:academia,crossfit,personal_trainer',
-            'owner' => 'required|string|max:255',
-            'cnpj' => 'required|string|unique:establishments|max:255',
-            'phone' => 'nullable|string|max:255',
-            'address' => 'nullable|string|max:255',
-            'social_network' => 'nullable|string|max:255',
-            'website' => 'nullable|string|max:255',
-            'active' => 'nullable|boolean',
-        ]);
+        $validatedData = $request->validated();
 
         if(isset($validatedData['active'])) {
             $validatedData['active'] = 1;
@@ -40,7 +57,7 @@ class EstablishmentController extends Controller
 
         \App\Models\Establishment::create($validatedData);
 
-        return redirect()->route('admin.establishments.index')->with('success', 'Estabelecimento atualizado com sucesso!');
+        return redirect()->route('admin.establishments.index')->with('success', 'Estabelecimento criado com sucesso!');
     }
 
     public function edit($establishment)
@@ -51,23 +68,11 @@ class EstablishmentController extends Controller
         return view('admin.establishments.edit', ['establishment' => $establishment, 'types' => $types]);
     }
 
-    public function update(Request $request, $establishmentId)
+    public function update(UpdateEstablishmentRequest $request, $establishmentId)
     {
         $establishment = \App\Models\Establishment::findOrFail($establishmentId);
 
-        //dd($establishment);
-
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'required|in:academia,crossfit,personal_trainer',
-            'owner' => 'required|string|max:255',
-            'cnpj' => 'required|string|max:255|unique:establishments,cnpj,'.$establishmentId,
-            'phone' => 'nullable|string|max:255',
-            'address' => 'nullable|string|max:255',
-            'social_network' => 'nullable|string|max:255',
-            'website' => 'nullable|string|max:255',
-            'active' => 'nullable|boolean',
-        ]);
+        $validatedData = $request->validated();
 
         if(isset($validatedData['active'])) {
             $validatedData['active'] = 1;
@@ -79,12 +84,39 @@ class EstablishmentController extends Controller
 
         return redirect()->route('admin.establishments.index')->with('success', 'Estabelecimento atualizado com sucesso!');
     }
+    public function manage($establishmentId)
+    {
+        $establishment = \App\Models\Establishment::findOrFail($establishmentId);
+        
+        return view('admin.establishments.manage', ['establishment' => $establishment]);
+    }
 
     public function view($establishmentId)
     {
         $establishment = \App\Models\Establishment::findOrFail($establishmentId);
         
-        return view('admin.establishments.view', ['establishment' => $establishment]);
+        return view('admin.establishments.manage_view', ['establishment' => $establishment]);
+    }
+
+    public function students($establishmentId)
+    {
+        $establishment = \App\Models\Establishment::findOrFail($establishmentId);
+        
+        return view('admin.establishments.manage_students', ['establishment' => $establishment]);
+    }
+
+    public function users($establishmentId)
+    {
+        $establishment = \App\Models\Establishment::findOrFail($establishmentId);
+        
+        return view('admin.establishments.manage_users', ['establishment' => $establishment]);
+    }
+
+    public function contracts($establishmentId)
+    {
+        $establishment = \App\Models\Establishment::findOrFail($establishmentId);
+        
+        return view('admin.establishments.manage_contracts', ['establishment' => $establishment]);
     }
 
     public function destroy($establishmentId)

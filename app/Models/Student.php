@@ -62,4 +62,9 @@ class Student extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Establishment::class, 'student_establishment');
     }
+
+    public function contracts()
+    {
+        return $this->hasMany(StudentContracts::class)->orderBy('end_date', 'desc');
+    }
 }

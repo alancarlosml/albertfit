@@ -28,16 +28,33 @@ class Establishment extends Model
      */
     public function contracts()
     {
-        return $this->hasMany(EstablishmentContracts::class);
+        return $this->hasMany(EstablishmentContracts::class)->orderBy('end_date', 'desc');
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_establishment');
+        return $this->belongsToMany(User::class, 'user_establishment')
+                    ->withPivot('role') // Certifique-se de que 'role' está incluído aqui
+                    ->withTimestamps();
     }
 
     public function students()
     {
         return $this->belongsToMany(Student::class, 'student_establishment');
+    }
+
+    public function exercises()
+    {
+        return $this->hasMany(Exercise::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function modalities()
+    {
+        return $this->hasMany(Modality::class);
     }
 }

@@ -4,89 +4,20 @@
     </x-header>
 
     <section class="bg-white dark:bg-gray-900">
-        <div class="py-8 px-4 mx-auto max-w-4xl lg:py-16">
-            <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Detalhes do Estabelecimento</h2>
-            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                <div class="sm:col-span-2">
-                    <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo</label>
-                    <span class="text-gray-900 dark:text-white">
-                        @if ($establishment->type == 'crossfit')
-                            {{ 'Crossfit' }}
-                        @elseif ($establishment->type == 'academia')
-                            {{ 'Academia' }}
-                        @elseif ($establishment->type == 'personal_trainer')
-                            {{ 'Personal trainer' }}
-                        @endif
-                    </span>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="name"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
-                    <span class="text-gray-900 dark:text-white">
-                        {{ $establishment->name }}
-                    </span>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="owner"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Proprietário</label>
-                    <span class="text-gray-900 dark:text-white">
-                        {{ $establishment->owner }}
-                    </span>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="cnpj"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CNPJ</label>
-                    <span class="text-gray-900 dark:text-white">
-                        {{ $establishment->cnpj }}
-                    </span>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="phone"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone</label>
-                    <span class="text-gray-900 dark:text-white">
-                        {{ $establishment->phone }}
-                    </span>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="social_network"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rede social</label>
-                    <span class="text-gray-900 dark:text-white">
-                        {{ $establishment->social_network }}
-                    </span>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="website"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Site</label>
-                    <span class="text-gray-900 dark:text-white">
-                        {{ $establishment->website }}
-                    </span>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="address"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Endereço</label>
-                    <span class="text-gray-900 dark:text-white">
-                        {{ $establishment->address }}
-                    </span>
-                </div>
-                <div class="sm:col-span-2">
-                    <label for="active"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stataus</label>
-                    <span class="text-gray-900 dark:text-white">
-                        @if ($establishment->active == 1)
-                            {{ 'Ativo' }}
-                        @elseif ($establishment->active == 0)
-                            {{ 'Inativo' }}
-                        @endif
-                </div>
-            </div>
+        <div class="py-8 mx-full">
+            <h2 class="text-5xl font-extrabold dark:text-white">
+                <small class="font-semibold text-gray-500 dark:text-gray-400">{{$establishment->name}}</small>
+            </h2>
 
-            <div class="py-8 px-4 mx-auto max-w-4xl lg:py-16">
+            <x-establishment-tabs :establishment="$establishment" />
+
+            <div class="py-8 mx-auto w-full">
                 <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Contratos</h2>
-                <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                <div class="mx-auto">
                     <div class="mx-auto w-full">
                         <div class="relative overflow-hidden">
                             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 py-4">
-                                <div class="w-full md:w-1/2">
+                                <div class="w-full">
                                     <form class="flex items-center">
                                         <label for="simple-search" class="sr-only">Search</label>
                                         <div class="relative w-full">
@@ -150,10 +81,19 @@
                                                 </div>
                                             </th>
                                             <th scope="col" class="py-3 px-6">
+                                                #
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">
                                                 Serviço
                                             </th>
                                             <th scope="col" class="py-3 px-6">
                                                 Total
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">
+                                                Data pagamento
+                                            </th>
+                                            <th scope="col" class="py-3 px-6">
+                                                Forma de pagamento
                                             </th>
                                             <th scope="col" class="py-3 px-6">
                                                 Início contrato
@@ -164,138 +104,115 @@
                                             <th scope="col" class="py-3 px-6">
                                                 Status
                                             </th>
-                                            {{-- <th scope="col" class="py-3 px-6">
+                                            <th scope="col" class="py-3 px-6">
                                                 Ações
-                                            </th> --}}
+                                            </th>
                                         </tr>
                                     </thead>
+                                    
                                     <tbody>
-                                        <template>
                                             @foreach ($establishment->contracts as $contract)
                                             <tr
-                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            
                                                 <td class="p-4 w-4">
                                                     <div class="flex items-center">
-                                                    <input type="checkbox"
-                                                            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"> 
+                                                        <input type="checkbox"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"> 
                                                             <label class="sr-only">checkbox</label>
                                                     </div>
                                                 </td>
                                                 <th scope="row"
                                                     class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                    {{ $contract->service_name }}
+                                                    {{ $contract->id }}
+                                                </th>
+                                                <th scope="row"
+                                                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    @if ($contract->service_name == 'semanal')
+                                                        Semanal
+                                                    @elseif ($contract->service_name == 'mensal')
+                                                        Mensal
+                                                    @elseif ($contract->service_name == 'trimestral')
+                                                        Trimestral
+                                                    @elseif ($contract->service_name == 'semestral')
+                                                        Semestral
+                                                    @elseif ($contract->service_name == 'anual')
+                                                        Anual
+                                                    @endif
                                                 </th>
                                                 <td class="py-4 px-6">
-                                                    R$ {{ number_format($contract->total, 2, ',', '.') }}
+                                                    R$ {{ number_format($contract->amount, 2, ',', '.') }}
                                                 </td>
                                                 <td class="py-4 px-6">
-                                                    {{ $contract->start_date->format('d/m/Y') }}
+                                                    {{\Carbon\Carbon::parse($contract->payment_date)->format('d/m/Y') }}
                                                 </td>
                                                 <td class="py-4 px-6">
-                                                    {{ $contract->end_date->format('d/m/Y') }}
+                                                    @if ($contract->payment_type == 'debito')
+                                                        Débito
+                                                    @elseif ($contract->payment_type == 'credito')
+                                                        Crédito
+                                                    @elseif ($contract->payment_type == 'boleto')
+                                                        Boleto
+                                                    @elseif ($contract->payment_type == 'pix')
+                                                        Pix
+                                                    @elseif ($contract->payment_type == 'dinheiro')
+                                                        Dinheiro
+                                                    @endif
                                                 </td>
                                                 <td class="py-4 px-6">
-                                                    @if ($contract->status == 1)
+                                                    {{\Carbon\Carbon::parse($contract->start_date)->format('d/m/Y') }}
+                                                </td>
+                                                <td class="py-4 px-6">
+                                                    {{ \Carbon\Carbon::parse($contract->end_date)->format('d/m/Y') }}
+                                                </td>
+                                                <td class="py-4 px-6">
+                                                    @if ($contract->active == 1)
                                                         {{ 'Ativo' }}
-                                                    @elseif ($contract->status == 0)
+                                                    @elseif ($contract->active == 0)
                                                         {{ 'Inativo' }}
                                                     @endif
                                                 </td>
-                                                
-                                                {{-- <td class="px-6 py-4 flex items-center">
-                                                    <a href="#" x-on:click="editEstablishment($event, establishment.id)" class="font-medium mr-3 text-green-600 dark:text-green-500 hover:underline">Gerenciar</a>
-                                                    <button x-bind:id="'item-' + establishment.id + '-dropdown-button'" 
-                                                            x-bind:data-dropdown-toggle="'item-' + establishment.id + '-dropdown'" 
-                                                            class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" 
-                                                            type="button">
-                                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                                        </svg>
-                                                    </button>
-                                                    <div x-bind:id="'item-' + establishment.id + '-dropdown'" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" x-bind:aria-labelledby="'item-' + establishment.id + '-dropdown-button'">
-                                                            <li>
-                                                                <a href="#" x-on:click="viewEstablishment($event, establishment.id)" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Detalhes</a>
-                                                                <div x-data="{ selectedEstablishmentId: null }">
-                                                                    <script>
-                                                                        function viewEstablishment(event, establishmentId) {
-                                                                            event.preventDefault();
-                                                                            var editUrl = `{{ url('/estabelecimentos') }}/${establishmentId}/detalhes`;
-                                                                            window.location.href = editUrl;
-                                                                        }
-                                                                    </script>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" x-on:click="editEstablishment($event, establishment.id)" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
-                                                                <div x-data="{ selectedEstablishmentId: null }">
-                                                                    <script>
-                                                                        function editEstablishment(event, establishmentId) {
-                                                                            event.preventDefault();
-                                                                            var editUrl = `{{ url('/estabelecimentos') }}/${establishmentId}/editar`;
-                                                                            window.location.href = editUrl;
-                                                                        }
-                                                                    </script>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="py-1">
-                                                            <a href="#" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Excluir</a>
+                                                <td class="py-4 px-6">
+                                                    <div class="flex items-center space-x-3">
+                                                        <a href="#" x-on:click="editEstablishment($event, establishment.id)"
+                                                           class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+                                                        <div x-data="{ selectedEstablishmentId: null }">
+                                                            {{--<script>
+                                                                function editEstablishment(event, establishmentId) {
+                                                                    event.preventDefault();
+                                                                    var editUrl = `{{ url('/estabelecimentos') }}/${establishmentId}/editar`;
+                                                                    window.location.href = editUrl;
+                                                                }
+                                                            </script>--}}
                                                         </div>
-                                                    </div>
-                                                    <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                                        <div class="relative p-4 w-full max-w-md max-h-full">
-                                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
-                                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                                    </svg>
-                                                                    <span class="sr-only">Close modal</span>
-                                                                </button>
-                                                                <div class="p-4 md:p-5 text-center">
-                                                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                                                    </svg>
-                                                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Você tem certeza que deseja excluir esse estabelecimento?</h3>
-                                                                    <button data-modal-hide="popup-modal"  x-on:click="deleteEstablishment($event, establishment.id)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                                                        Sim, tenho certeza
+                                                        <a href="#" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="font-medium text-red-600 dark:text-red-500 hover:underline">Excluir</a>
+                                                        
+                                                        <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                            <div class="relative p-4 w-full max-w-md max-h-full">
+                                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                                    <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                                                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                                        </svg>
+                                                                        <span class="sr-only">Close modal</span>
                                                                     </button>
-                                                                    <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Não, cancelar</button>
+                                                                    <div class="p-4 md:p-5 text-center">
+                                                                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                                        </svg>
+                                                                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Você tem certeza que deseja excluir esse estabelecimento?</h3>
+                                                                        <button data-modal-hide="popup-modal"  x-on:click="deleteEstablishment($event, establishment.id)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                                            Sim, tenho certeza
+                                                                        </button>
+                                                                        <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Não, cancelar</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                        
-                                                    <script>
-                                                        function deleteEstablishment(event, establishmentId) {
-                                                            event.preventDefault();
-                                            
-                                                            fetch(`/estabelecimentos/${establishmentId}/excluir`, {
-                                                                    method: 'DELETE',
-                                                                    headers: {
-                                                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                                                        'Content-Type': 'application/json'
-                                                                    }
-                                                                })
-                                                                .then(response => {
-                                                                    if (response.ok) {
-                                                                        window.location.href = '{{ route('admin.establishments.index') }}';
-                                                                    } else {
-                                                                        alert('Ocorreu um erro ao excluir o estabelecimento.');
-                                                                    }
-                                                                })
-                                                                .catch(error => {
-                                                                    console.error('Erro:', error);
-                                                                    alert('Ocorreu um erro ao excluir o estabelecimento.');
-                                                                });
-                                                        }
-                                                    </script>
-                                                </td> --}}
+                                                </td>
                                             </tr>
                                             @endforeach
-                                        </template>
-            
                                     </tbody>
                                 </table>
                             </div>
@@ -357,8 +274,7 @@
                         </div>
                     </div>
                 </div>
-            </div>   
-
+            </div> 
 
             <div class="mt-4 flex justify-end">
                 <a href="{{ route('admin.establishments.index') }}"

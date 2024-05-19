@@ -1,17 +1,19 @@
 <?php
 
-use App\Models\EstablishmentContract;
+namespace Database\Factories;
+
 use App\Models\Establishment;
+use App\Models\EstablishmentContracts;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EstablishmentContractFactory extends Factory
+class EstablishmentContractsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = EstablishmentContract::class;
+    protected $model = EstablishmentContracts::class;
 
     /**
      * Define the model's default state.
@@ -22,34 +24,33 @@ class EstablishmentContractFactory extends Factory
     {
         $serviceNames = ['semanal', 'mensal', 'trimestral', 'semestral', 'anual'];
         $paymentTypes = ['credito', 'debito', 'pix', 'boleto', 'dinheiro'];
-    
+
         $serviceName = $this->faker->randomElement($serviceNames);
-        $startDate = $this->faker->date();
+        $startDate = $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d');
         $paymentDate = $this->faker->dateTimeBetween('-1 year', $startDate)->format('Y-m-d');
-        $endDate = null;
-    
+
         switch ($serviceName) {
             case 'semanal':
                 $endDate = $this->faker->dateTimeBetween($startDate, '+7 days')->format('Y-m-d');
                 break;
             case 'mensal':
-                $endDate = $this->faker->dateTimeBetween($startDate, '+30 days')->format('Y-m-d');
+                $endDate = $this->faker->dateTimeBetween($startDate, '+1 month')->format('Y-m-d');
                 break;
             case 'trimestral':
-                $endDate = $this->faker->dateTimeBetween($startDate, '+90 days')->format('Y-m-d');
+                $endDate = $this->faker->dateTimeBetween($startDate, '+3 months')->format('Y-m-d');
                 break;
             case 'semestral':
-                $endDate = $this->faker->dateTimeBetween($startDate, '+180 days')->format('Y-m-d');
+                $endDate = $this->faker->dateTimeBetween($startDate, '+6 months')->format('Y-m-d');
                 break;
             case 'anual':
-                $endDate = $this->faker->dateTimeBetween($startDate, '+365 days')->format('Y-m-d');
+                $endDate = $this->faker->dateTimeBetween($startDate, '+1 year')->format('Y-m-d');
                 break;
             default:
                 // Se o tipo de serviço for desconhecido, defina end_date como null
                 $endDate = null;
                 break;
         }
-    
+
         return [
             'establishment_id' => Establishment::all()->random()->id,
             'service_name' => $serviceName,
@@ -62,4 +63,5 @@ class EstablishmentContractFactory extends Factory
             'created_at' => $paymentDate,
         ];
     }
+
 }

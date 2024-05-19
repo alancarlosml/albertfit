@@ -14,10 +14,6 @@ class StudentEstablishment extends Model
     protected $fillable = [
         'student_id',
         'establishment_id',
-        'service_name',
-        'amount',
-        'start_date',
-        'end_date',
         'active',
     ];
 

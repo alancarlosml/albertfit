@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Models\Instructor;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,8 +21,7 @@ class InstructorFactory extends Factory
 
         $instructorAttributes = [
             'user_id' => $this->faker->randomElement($instructorIds),
-            'phone' => $this->faker->phoneNumber,
-            'profile_picture' => null, // Pode adicionar um link para uma imagem aleatória, se desejar
+            'profile_picture' => $this->faker->imageUrl(), // Pode adicionar um link para uma imagem aleatória, se desejar
             'academic_degree' => $this->faker->randomElement($degree),
             'professional_experience' => $this->faker->paragraph,
         ];
