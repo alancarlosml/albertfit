@@ -131,7 +131,7 @@
                                                         {{ $user->email }}
                                                     </td>
                                                     <td class="py-4 px-6">
-                                                        {{ $user->pivot->role }}
+                                                        {{ucfirst($user->roles->where('pivot.establishment_id', $establishment->id)->first()->role)}}
                                                     </td>
                                                     <td class="py-4 px-6">
                                                         @if ($user->active == 1)

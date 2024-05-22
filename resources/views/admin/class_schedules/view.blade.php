@@ -49,7 +49,11 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div> 
+
+            <div class="overflow-x-auto" x-data="{ class_bookings: {{ @json_encode($class_schedule->class_bookings) }}, selectAll: false }">
+                @include('admin.class_bookings.partials.table', ['class_bookings' => $class_schedule->class_bookings])
+            </div>
             
             <div class="mt-4 flex justify-end">
                 <a href="{{ route('admin.class_schedules.index') }}"

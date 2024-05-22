@@ -12,19 +12,13 @@
                 Estabelecimento
             </th>
             <th scope="col" class="py-3 px-6">
-                Modalidade
+                Categoria
             </th>
             <th scope="col" class="py-3 px-6">
-                Descrição
+                Nome
             </th>
             <th scope="col" class="py-3 px-6">
-                Data
-            </th>
-            <th scope="col" class="py-3 px-6">
-                Hora início
-            </th>
-            <th scope="col" class="py-3 px-6">
-                Hora fim
+                Status
             </th>
             <th scope="col" class="py-3 px-6">
                 Ações
@@ -32,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        <template x-for="class_schedule in class_schedules" :key="class_schedule.id">
+        <template x-for="exercise in exercises" :key="exercise.id">
             <tr
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
@@ -40,52 +34,46 @@
                     <div class="flex items-center">
                     <input type="checkbox"
                             class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                            :id="`checkbox-table-search-` + class_schedule.id"
-                            :checked="selectAll"> <label :for="`checkbox-table-search-` + class_schedule.id" class="sr-only">checkbox</label>
+                            :id="`checkbox-table-search-` + exercise.id"
+                            :checked="selectAll"> <label :for="`checkbox-table-search-` + exercise.id" class="sr-only">checkbox</label>
                     </div>
                 </td>
                 <td scope="row"
                     class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    x-text="class_schedule.establishment.name">
+                    x-text="exercise.establishment.name">
                 </td>
                 <td scope="row"
                     class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    x-text="class_schedule.modality.name">
+                    x-text="exercise.category.name">
                 </td>
                 <td scope="row"
                     class="py-4 px-6"
-                    x-text="class_schedule.description">
+                    x-text="exercise.name">
                 </td>
-                <td scope="row"
-                    class="py-4 px-5"
-                    x-text="class_schedule.class_date">
-                </td>
-                <td scope="row"
-                    class="py-4 px-6"
-                    x-text="class_schedule.start_time">
-                </td>
-                <td scope="row"
-                    class="py-4 px-6"
-                    x-text="class_schedule.end_time">
+                <td class="py-4 px-6">
+                    <div class="flex items-center">
+                        <div class="inline-block w-4 h-4 mr-2 rounded-full" x-bind:class="exercise.active ? 'bg-green-700' : 'bg-red-700'"></div>
+                        <span x-text="exercise.active ? 'Ativo' : 'Inativo'"></span>
+                    </div>
                 </td>
                 <td class="px-6 py-4 flex items-center">
-                    <a href="#" x-on:click="viewClassSchedule($event, class_schedule.id)" class="font-medium mr-3 text-green-600 dark:text-green-500 hover:underline">Detalhes</a>
-                    <div x-data="{ selectedclass_scheduleId: null }">
+                    <a href="#" x-on:click="viewExercise($event, exercise.id)" class="font-medium mr-3 text-green-600 dark:text-green-500 hover:underline">Detalhes</a>
+                    <div x-data="{ selectedexerciseId: null }">
                         <script>
-                            function viewClassSchedule(event, class_scheduleId) {
+                            function viewExercise(event, exerciseId) {
                                 event.preventDefault();
-                                var editUrl = `{{ url('/aulas') }}/${class_scheduleId}/detalhes`;
+                                var editUrl = `{{ url('/exercicios') }}/${exerciseId}/detalhes`;
                                 window.location.href = editUrl;
                             }
                         </script>
                     </div>
-                    <a href="#" x-on:click="editClassSchedule($event, class_schedule.id)"
+                    <a href="#" x-on:click="editExercise($event, exercise.id)"
                     class="font-medium mr-3 text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                    <div x-data="{ selectedclass_scheduleId: null }">
+                    <div x-data="{ selectedexerciseId: null }">
                         <script>
-                            function editClassSchedule(event, class_scheduleId) {
+                            function editExercise(event, exerciseId) {
                                 event.preventDefault();
-                                var editUrl = `{{ url('/aulas') }}/${class_scheduleId}/editar`;
+                                var editUrl = `{{ url('/exercicios') }}/${exerciseId}/editar`;
                                 window.location.href = editUrl;
                             }
                         </script>
@@ -105,8 +93,8 @@
                                     <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                     </svg>
-                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Você tem certeza que deseja excluir essa aula?</h3>
-                                    <button data-modal-hide="popup-modal"  x-on:click="deleteClassSchedule($event, class_schedule.id)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Você tem certeza que deseja excluir essa exercício?</h3>
+                                    <button data-modal-hide="popup-modal"  x-on:click="deleteExercise($event, exercise.id)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                         Sim, tenho certeza
                                     </button>
                                     <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Não, cancelar</button>
@@ -116,10 +104,10 @@
                     </div>
         
                     <script>
-                        function deleteClassSchedule(event, class_scheduleId) {
+                        function deleteExercise(event, exerciseId) {
                             event.preventDefault();
             
-                            fetch(`/aulas/${class_scheduleId}/excluir`, {
+                            fetch(`/exercicios/${exerciseId}/excluir`, {
                                     method: 'DELETE',
                                     headers: {
                                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -128,14 +116,14 @@
                                 })
                                 .then(response => {
                                     if (response.ok) {
-                                        window.location.href = '{{ route('admin.class_schedules.index') }}';
+                                        window.location.href = '{{ route('admin.exercises.index') }}';
                                     } else {
-                                        alert('Ocorreu um erro ao excluir a aula.');
+                                        alert('Ocorreu um erro ao excluir o exercício.');
                                     }
                                 })
                                 .catch(error => {
                                     console.error('Erro:', error);
-                                    alert('Ocorreu um erro ao excluir a aula.');
+                                    alert('Ocorreu um erro ao excluir o exercício.');
                                 });
                         }
                     </script>

@@ -18,9 +18,12 @@ class CreateWorkoutsTable extends Migration
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->unsignedBigInteger('exercise_id');
             $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
+            $table->integer('order');
             $table->integer('sets');
             $table->integer('repetitions');
             $table->integer('rest_time'); // Tempo de descanso entre séries em segundos
+            $table->text('notes')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

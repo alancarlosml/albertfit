@@ -9,7 +9,16 @@ module.exports = {
       "./node_modules/flowbite/**/*.js"
     ],
     theme: {
-      extend: {},
+      extend: {
+        colors : {
+            'primary' : '#f97316',
+            'secondary' : '#64748b',
+            'dark' : '#0f172a',
+        },
+        fontFamily: {
+            sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+        },
+      },
     },
     plugins: [
         require('flowbite/plugin')

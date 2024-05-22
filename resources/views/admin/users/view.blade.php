@@ -138,8 +138,7 @@
                                     
                                     <tbody>
                                             @foreach ($user->establishments as $establishment)
-                                            <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             
                                                 <td class="p-4 w-4">
                                                     <div class="flex items-center">
@@ -157,7 +156,7 @@
                                                     {{ $establishment->name }}
                                                 </th>
                                                 <td class="py-4 px-6">
-                                                    {{ ucfirst($establishment->pivot->role) }}
+                                                    {{ucfirst($user->roles->where('pivot.establishment_id', $establishment->id)->first()->role)}}
                                                 </td>
                                                 <td class="py-4 px-6">
                                                     {{\Carbon\Carbon::parse($establishment->created_at)->format('d/m/Y') }}

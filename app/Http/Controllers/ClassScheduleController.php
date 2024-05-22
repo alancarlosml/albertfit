@@ -13,7 +13,13 @@ class ClassScheduleController extends Controller
 {
     public function index()
     {
-        $class_schedules = ClassSchedule::with(['modality', 'establishment'])->get();
+        $class_schedules = ClassSchedule::select('class_schedules.*')
+                                        ->leftJoin('establishments', 'class_schedules.establishment_id', '=', 'establishments.id')
+                                        ->leftJoin('modalities', 'class_schedules.modality_id', '=', 'modalities.id')
+                                        ->orderBy('class_schedules.class_date','desc')
+                                        ->orderBy('class_schedules.start_time','desc')
+                                        ->with(['modality', 'establishment'])->get();
+
         return view('admin.class_schedules.index', ['class_schedules' => $class_schedules]);
     }
 
@@ -36,6 +42,7 @@ class ClassScheduleController extends Controller
         $class_schedule = ClassSchedule::findOrFail($id);
         $modalities = Modality::all();
         $establishments = Establishment::all();
+
         return view('admin.class_schedules.edit', [
             'class_schedule' => $class_schedule,
             'modalities' => $modalities,
@@ -53,7 +60,7 @@ class ClassScheduleController extends Controller
 
     public function view($id)
     {
-        $class_schedule = ClassSchedule::with(['modality', 'establishment'])->findOrFail($id);
+        $class_schedule = ClassSchedule::with(['modality', 'establishment', 'class_bookings.student'])->findOrFail($id);
         return view('admin.class_schedules.view', ['class_schedule' => $class_schedule]);
     }
 

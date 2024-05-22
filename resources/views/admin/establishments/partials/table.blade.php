@@ -25,7 +25,15 @@
                     </div>
                 </td>
                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $establishment->name }}</th>
-                <td class="py-4 px-6">{{ $establishment->type }}</td>
+                <td class="py-4 px-6">
+                    @if ($establishment->type == 'academia')
+                        Academia
+                    @elseif ($establishment->type == 'crossfit')
+                        Crossfit
+                    @elseif ($establishment->type == 'personal_trainer')
+                        Personal trainer
+                    @endif
+                </td>
                 <td class="py-4 px-6">{{ $establishment->cnpj }}</td>
                 <td class="py-4 px-6">{{ $establishment->phone }}</td>
                 <td class="py-4 px-6">

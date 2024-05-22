@@ -50,15 +50,7 @@
         <select id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
             <option selected="">Selecione</option>
             @foreach ($roles as $role)
-                {{-- @php
-                    $selectedRole = '';
-                
-                    if (isset($user) && $user->establishments->isNotEmpty()) {
-                        $selectedRole = $user->establishments->first()->pivot->role ?? '';
-                    }
-                @endphp --}}
-        
-                <option value="{{ $role->role }}">
+                <option value="{{ $role->id }}">
                     {{ ucfirst($role->role) }}
                 </option>
             @endforeach

@@ -33,8 +33,8 @@ class Establishment extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_establishment')
-                    ->withPivot('role') // Certifique-se de que 'role' está incluído aqui
+        return $this->belongsToMany(User::class, 'role_user')
+                    ->withPivot('role_id')
                     ->withTimestamps();
     }
 
@@ -46,6 +46,11 @@ class Establishment extends Model
     public function exercises()
     {
         return $this->hasMany(Exercise::class);
+    }
+
+    public function workouts()
+    {
+        return $this->hasMany(Workout::class);
     }
 
     public function categories()

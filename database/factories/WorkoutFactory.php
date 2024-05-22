@@ -24,8 +24,11 @@ class WorkoutFactory extends Factory
     {
         $establishment = Establishment::all()->random();
 
-        $instructorIds = $establishment->users()->wherePivot('role', 'instrutor')->pluck('users.id')->toArray();
-        var_dump($instructorIds);
+        // Use whereHas() para filtrar os instrutores com base na função 'instrutor'
+        $instructorIds = $establishment->users()->whereHas('roles', function ($query) {
+            $query->where('role', 'instrutor');
+        })->pluck('users.id')->toArray();
+
         $studentIds = $establishment->students()->pluck('students.id')->toArray();
         $exerciseIds = $establishment->exercises()->pluck('exercises.id')->toArray();
 
@@ -34,9 +37,12 @@ class WorkoutFactory extends Factory
             'user_id' => $this->faker->randomElement($instructorIds),
             'student_id' => $this->faker->randomElement($studentIds),
             'exercise_id' => $this->faker->randomElement($exerciseIds),
+            'order' => $this->faker->numberBetween(1, 10),
             'sets' => $this->faker->numberBetween(1, 5),
             'repetitions' => $this->faker->numberBetween(5, 20),
             'rest_time' => $this->faker->numberBetween(30, 120), // Tempo de descanso entre 30 e 120 segundos
+            'notes' => $this->faker->sentence(),
+            'active' => $this->faker->boolean,
         ];
     }
 }

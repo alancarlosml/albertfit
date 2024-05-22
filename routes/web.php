@@ -86,3 +86,30 @@ Route::get('/aulas/{class_schedules}/detalhes', [\App\Http\Controllers\ClassSche
 Route::delete('/aulas/{class_schedules}/excluir', [\App\Http\Controllers\ClassScheduleController::class, 'destroy'])->name('admin.class_schedules.destroy');
 Route::get('/aulas/{class_schedules}/restaurar', [\App\Http\Controllers\ClassScheduleController::class, 'restore'])->name('admin.class_schedules.restore');
 
+Route::get('/reservas', [\App\Http\Controllers\ClassBookingController::class, 'index'])->name('admin.class_bookings.index');
+Route::get('/reservas/novo', [\App\Http\Controllers\ClassBookingController::class, 'create'])->name('admin.class_bookings.create');
+Route::post('/reservas/novo', [\App\Http\Controllers\ClassBookingController::class, 'store'])->name('admin.class_bookings.store');
+Route::get('/reservas/{class_bookings}/editar', [\App\Http\Controllers\ClassBookingController::class, 'edit'])->name('admin.class_bookings.edit');
+Route::put('/reservas/{class_bookings}/editar', [\App\Http\Controllers\ClassBookingController::class, 'update'])->name('admin.class_bookings.update');
+Route::get('/reservas/{class_bookings}/detalhes', [\App\Http\Controllers\ClassBookingController::class, 'view'])->name('admin.class_bookings.view');
+Route::delete('/reservas/{class_bookings}/excluir', [\App\Http\Controllers\ClassBookingController::class, 'destroy'])->name('admin.class_bookings.destroy');
+Route::get('/reservas/{class_bookings}/restaurar', [\App\Http\Controllers\ClassBookingController::class, 'restore'])->name('admin.class_bookings.restore');
+
+Route::get('/exercicios', [\App\Http\Controllers\ExerciseController::class, 'index'])->name('admin.exercises.index');
+Route::get('/exercicios/novo', [\App\Http\Controllers\ExerciseController::class, 'create'])->name('admin.exercises.create');
+Route::post('/exercicios/novo', [\App\Http\Controllers\ExerciseController::class, 'store'])->name('admin.exercises.store');
+Route::get('/exercicios/{exercises}/editar', [\App\Http\Controllers\ExerciseController::class, 'edit'])->name('admin.exercises.edit');
+Route::put('/exercicios/{exercises}/editar', [\App\Http\Controllers\ExerciseController::class, 'update'])->name('admin.exercises.update');
+Route::get('/exercicios/{exercises}/detalhes', [\App\Http\Controllers\ExerciseController::class, 'view'])->name('admin.exercises.view');
+Route::delete('/exercicios/{exercises}/excluir', [\App\Http\Controllers\ExerciseController::class, 'destroy'])->name('admin.exercises.destroy');
+Route::get('/exercicios/{exercises}/restaurar', [\App\Http\Controllers\ExerciseController::class, 'restore'])->name('admin.exercises.restore');
+
+Route::get('/treinos', [\App\Http\Controllers\WorkoutController::class, 'index'])->name('admin.workouts.index');
+Route::get('/treinos/novo', [\App\Http\Controllers\WorkoutController::class, 'create'])->name('admin.workouts.create');
+Route::post('/treinos/novo', [\App\Http\Controllers\WorkoutController::class, 'store'])->name('admin.workouts.store');
+Route::get('/treinos/{workouts}/editar', [\App\Http\Controllers\WorkoutController::class, 'edit'])->name('admin.workouts.edit');
+Route::put('/treinos/{workouts}/editar', [\App\Http\Controllers\WorkoutController::class, 'update'])->name('admin.workouts.update');
+Route::get('/treinos/{workouts}/detalhes', [\App\Http\Controllers\WorkoutController::class, 'view'])->name('admin.workouts.view');
+Route::delete('/treinos/{workouts}/excluir', [\App\Http\Controllers\WorkoutController::class, 'destroy'])->name('admin.workouts.destroy');
+Route::get('/treinos/{workouts}/restaurar', [\App\Http\Controllers\WorkoutController::class, 'restore'])->name('admin.workouts.restore');
+

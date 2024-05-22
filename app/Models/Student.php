@@ -67,4 +67,9 @@ class Student extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(StudentContracts::class)->orderBy('end_date', 'desc');
     }
+
+    public function workouts()
+    {
+        return $this->hasMany(Workout::class);
+    }
 }

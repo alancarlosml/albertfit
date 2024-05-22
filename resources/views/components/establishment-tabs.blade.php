@@ -7,7 +7,7 @@
             <a href="{{ route('admin.establishments.students', $establishment->id) }}" class="inline-block p-4 border-b-2 rounded-t-lg @if(Request::route()->getName() == 'admin.establishments.students') active text-blue-600 border-blue-600 dark:text-blue-500 dark:border-blue-500 @else border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 @endif">Alunos</a>
         </li>
         <li class="me-2">
-            <a href="{{ route('admin.establishments.users', $establishment->id) }}" class="inline-block p-4 border-b-2 rounded-t-lg @if(Request::route()->getName() == 'admin.establishments.users') active text-blue-600 border-blue-600 dark:text-blue-500 dark:border-blue-500 @else border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 @endif">Usuários</a>
+            <a href="{{ route('admin.establishments.users', $establishment->id) }}" class="inline-block p-4 border-b-2 rounded-t-lg @if(Request::route()->getName() == 'admin.establishments.users') active text-blue-600 border-blue-600 dark:text-blue-500 dark:border-blue-500 @else border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 @endif">Colaboradores</a>
         </li>
         <li class="me-2">
             <a href="{{ route('admin.establishments.contracts', $establishment->id) }}" class="inline-block p-4 border-b-2 rounded-t-lg @if(Request::route()->getName() == 'admin.establishments.contracts') active text-blue-600 border-blue-600 dark:text-blue-500 dark:border-blue-500 @else border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 @endif">Contratos</a>

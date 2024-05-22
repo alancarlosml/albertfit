@@ -52,4 +52,9 @@ class ClassSchedule extends Model
     {
         return $this->belongsTo(Establishment::class);
     }
+
+    public function class_bookings()
+    {
+        return $this->hasMany(ClassBooking::class);
+    }
 }

@@ -30,7 +30,7 @@ class StudentFactory extends Factory
             'cpf' => $this->faker->unique()->numerify('###########'), // Assuming 11 digits CPF
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'password' => Hash::make('password'), // Change 'password' to your desired default password
+            'password' => bcrypt('password'), // Change 'password' to your desired default password
             'birthdate' => $this->faker->date(),
             'address' => $this->faker->address,
             'phone' => $this->faker->phoneNumber,

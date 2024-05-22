@@ -20,9 +20,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
-        'phone',
         'password',
         'cpf',
+        'phone',
         'active',
     ];
 
@@ -49,15 +49,27 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function establishments()
+    public function roles()
     {
-        return $this->belongsToMany(Establishment::class, 'user_establishment', 'user_id', 'establishment_id')
-                    ->withPivot('role')
+        return $this->belongsToMany(Role::class, 'role_user')
+                    ->withPivot('establishment_id')
                     ->withTimestamps();
     }
 
-    public function instructor()
+    public function details()
     {
-        return $this->hasOne(Instructor::class);
+        return $this->hasOne(UserDetail::class);
+    }
+
+    public function establishments()
+    {
+        return $this->belongsToMany(Establishment::class, 'role_user', 'user_id', 'establishment_id')
+                    ->withPivot('role_id')
+                    ->withTimestamps();
+    }
+
+    public function workouts()
+    {
+        return $this->hasMany(Workout::class);
     }
 }
