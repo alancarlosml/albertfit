@@ -27,6 +27,10 @@ Route::put('/usuarios/{user}/editar', [\App\Http\Controllers\UserController::cla
 Route::get('/usuarios/{user}/detalhes', [\App\Http\Controllers\UserController::class, 'view'])->name('admin.users.view');
 Route::delete('/usuarios/{user}/excluir', [\App\Http\Controllers\UserController::class, 'destroy'])->name('admin.users.destroy');
 Route::get('/usuarios/{user}/restaurar', [\App\Http\Controllers\UserController::class, 'restore'])->name('admin.users.restore');
+Route::post('/usuarios/{user}/vincular', [\App\Http\Controllers\UserController::class, 'linkEstablishment'])->name('admin.users.establishments.store');
+#Route::get('/usuarios/{user}/vincular/editar/{establishment}', [\App\Http\Controllers\UserController::class, 'editLinkEstablishment'])->name('admin.users.establishments.edit');
+Route::put('/usuarios/{user}/vincular/editar', [\App\Http\Controllers\UserController::class, 'updateLinkEstablishment'])->name('admin.users.establishments.update');
+Route::get('/usuarios/{user}/desvincular/{establishment}', [\App\Http\Controllers\UserController::class, 'unlinkEstablishment'])->name('admin.users.establishments.destroy');
 
 // Route::get('/instrutores', [\App\Http\Controllers\InstructorController::class, 'index'])->name('admin.instructors.index');
 // Route::get('/instrutores/novo', [\App\Http\Controllers\InstructorController::class, 'create'])->name('admin.instructors.create');
@@ -58,6 +62,7 @@ Route::put('/alunos/{student}/editar', [\App\Http\Controllers\StudentController:
 Route::get('/alunos/{student}/detalhes', [\App\Http\Controllers\StudentController::class, 'view'])->name('admin.students.view');
 Route::delete('/alunos/{student}/excluir', [\App\Http\Controllers\StudentController::class, 'destroy'])->name('admin.students.destroy');
 Route::get('/alunos/{student}/restaurar', [\App\Http\Controllers\StudentController::class, 'restore'])->name('admin.students.restore');
+Route::get('/alunos/{student}/contratos/{establishment}', [\App\Http\Controllers\StudentController::class, 'contracts'])->name('admin.students.contracts');
 
 Route::get('/categorias', [\App\Http\Controllers\CategoryController::class, 'index'])->name('admin.categories.index');
 Route::get('/categorias/novo', [\App\Http\Controllers\CategoryController::class, 'create'])->name('admin.categories.create');

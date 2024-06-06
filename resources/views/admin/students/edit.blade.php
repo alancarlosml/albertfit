@@ -7,7 +7,7 @@
         <div class="py-8 px-4 mx-auto max-w-4xl lg:py-16">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Editar Aluno</h2>
 
-            <x-alert-error />   
+            <x-alert-error />
 
             <form action="{{ route('admin.students.update', $student->id) }}" method="POST">
                 @method('put')
@@ -23,7 +23,7 @@
             const datepickerEl = document.getElementById('birthdate');
             new Datepicker(datepickerEl, {
                 // options
-            }); 
+            });
         </script>
     @endpush
 

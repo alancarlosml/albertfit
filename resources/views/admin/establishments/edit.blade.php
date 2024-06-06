@@ -10,7 +10,7 @@
             <x-alert-error />
 
             <form action="{{ route('admin.establishments.update', $establishment->id) }}" method="POST">
-                
+
                 @method('put')
                 @include('admin.establishments.partials.form')
 

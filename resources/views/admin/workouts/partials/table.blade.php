@@ -30,6 +30,9 @@
                 Tempo de descanso
             </th>
             <th scope="col" class="py-3 px-6">
+                Status
+            </th>
+            <th scope="col" class="py-3 px-6">
                 Ações
             </th>
         </tr>

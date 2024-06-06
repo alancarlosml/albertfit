@@ -10,7 +10,7 @@
             <x-alert-error />
 
             <form action="{{ route('admin.establishments.store') }}" method="POST">
-               
+
                 @include('admin.establishments.partials.form')
 
             </form>

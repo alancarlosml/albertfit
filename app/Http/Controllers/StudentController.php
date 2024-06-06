@@ -82,4 +82,15 @@ class StudentController extends Controller
 
         return redirect()->route('admin.students.index')->with('success', 'Aluno restaurado com sucesso.');
     }
+
+    public function contracts($studentId, $establishmentId){
+
+        $student = \App\Models\Student::findOrFail($studentId);
+        $establishment = \App\Models\Establishment::findOrFail($establishmentId);
+
+        $contracts = \App\Models\StudentContracts::where('student_id', $studentId)->where('establishment_id', $establishmentId)->get();
+
+        return view('admin.students.contracts', ['student' => $student, 'establishment' => $establishment, 'contracts' => $contracts]);
+
+    }
 }

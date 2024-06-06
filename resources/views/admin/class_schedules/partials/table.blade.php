@@ -21,10 +21,10 @@
                 Data
             </th>
             <th scope="col" class="py-3 px-6">
-                Hora início
+                Início
             </th>
             <th scope="col" class="py-3 px-6">
-                Hora fim
+                Fim
             </th>
             <th scope="col" class="py-3 px-6">
                 Ações

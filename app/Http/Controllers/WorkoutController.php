@@ -24,7 +24,7 @@ class WorkoutController extends Controller
                              ->with(['establishment', 'user', 'student', 'exercise'])
                              ->get();
 
-return view('admin.workouts.index', ['workouts' => $workouts]);
+        return view('admin.workouts.index', ['workouts' => $workouts]);
     }
 
     public function create()

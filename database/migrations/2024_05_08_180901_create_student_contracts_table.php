@@ -22,7 +22,7 @@ class CreateStudentContractsTable extends Migration
             $table->enum('service_name', ['semanal', 'mensal', 'trimestral', 'semestral', 'anual']);
             $table->decimal('amount', 8, 2);
             $table->date('payment_date');
-            $table->enum('payment_type', ['credito', 'debito', 'pix','boleto', 'dinheiro']);
+            $table->enum('payment_type', ['credito', 'debito', 'pix', 'boleto', 'dinheiro']);
             $table->date('start_date');
             $table->date('end_date');
             $table->boolean('active')->default(true);

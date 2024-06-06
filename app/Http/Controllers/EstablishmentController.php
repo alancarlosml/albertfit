@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEstablishmentRequest;
 use App\Http\Requests\UpdateEstablishmentRequest;
 use App\Models\Establishment;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class EstablishmentController extends Controller
@@ -84,8 +85,9 @@ class EstablishmentController extends Controller
     public function users($establishmentId)
     {
         $establishment = Establishment::findOrFail($establishmentId);
+        $roles = Role::where('role', '!=', 'superuser')->get();
         
-        return view('admin.establishments.manage_users', ['establishment' => $establishment]);
+        return view('admin.establishments.manage_users', ['establishment' => $establishment, 'roles' => $roles]);
     }
 
     public function contracts($establishmentId)

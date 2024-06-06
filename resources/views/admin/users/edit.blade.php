@@ -23,7 +23,7 @@
             const datepickerEl = document.getElementById('birthdate');
             new Datepicker(datepickerEl, {
                 // options
-            }); 
+            });
         </script>
     @endpush
 
